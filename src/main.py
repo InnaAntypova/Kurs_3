@@ -1,11 +1,11 @@
-from utils.utils import load_operations_json,sorted_operations,get_date,get_feedback
+from utils.utils import load_operations_json, sorted_operations, get_date, get_feedback
 import os.path
 
 # Путь к файлу c операциями
 json_path = os.path.join('data', 'operations.json')
 
 
-#Основной код
+# Основной код
 def main():
     operations = load_operations_json(json_path)
     sort_operations = sorted_operations(operations)
