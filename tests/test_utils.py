@@ -1,5 +1,6 @@
 import pytest
-from src.utils.utils import load_operations_json, hide_number_from, hide_number_to, sorted_operations, get_date
+from src.utils.utils import load_operations_json, hide_number_from, hide_number_to, sorted_operations, get_date, \
+     get_feedback
 import os.path
 
 test_json_path = os.path.join('tests', 'data', 'test_operations.json')
@@ -65,3 +66,27 @@ def test_sorted_operations(data):
 def test_get_date():
     test_date = {"date": "2019-07-13T18:51:29.313309"}
     assert get_date(test_date) == '13.07.2019'
+
+
+@pytest.fixture
+def data_feedback():
+    expected_data = {"id": 667307132,
+                      "state": "EXECUTED",
+                      "date": "2019-07-13T18:51:29.313309",
+                      "operationAmount": {
+                          "amount": "97853.86",
+                          "currency": {
+                              "name": "руб.",
+                              "code": "RUB"
+                          }
+                      },
+                      "description": "Перевод с карты на счет",
+                      "from": "Maestro 1308795367077170",
+                      "to": "Счет 96527012349577388612"
+                      }
+    return expected_data
+
+
+def test_get_feedback(data_feedback):
+    test_date = '13.07.2019'
+    assert get_feedback(data_feedback, test_date) is None
